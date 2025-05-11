@@ -3,20 +3,17 @@ import "vuetify/styles";
 import { createVuetify } from "vuetify";
 import * as components from "vuetify/components";
 import * as directives from "vuetify/directives";
-
-// ✅ Add this
 import { aliases, mdi } from "vuetify/iconsets/mdi";
 import "@mdi/font/css/materialdesignicons.css";
 
-export default createVuetify({
+// expose this instance
+export const vuetifyInstance = createVuetify({
   components,
   directives,
   icons: {
     defaultSet: "mdi",
     aliases,
-    sets: {
-      mdi,
-    },
+    sets: { mdi },
   },
   theme: {
     defaultTheme: localStorage.getItem("theme") || "lightTheme",
@@ -39,6 +36,12 @@ export default createVuetify({
       },
     },
   },
-  rtl: localStorage.getItem("lang") === "ar",
-  lang: localStorage.getItem("lang"),
+  locale: {
+    locale: localStorage.getItem("lang") || "en",
+    fallback: "en",
+    messages: {}, // vue-i18n handles actual translations
+  },
+  // Don't set `rtl` statically
 });
+
+export default vuetifyInstance;

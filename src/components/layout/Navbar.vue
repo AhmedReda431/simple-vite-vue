@@ -26,11 +26,12 @@
 
         <!-- Desktop Menu -->
         <v-toolbar-items class="d-none d-md-flex">
-            <v-btn text to="/home" class="mx-2">{{ $t('nav.home') }}</v-btn>
-            <v-btn text to="/about" class="mx-2">{{ $t('nav.about') }}</v-btn>
-            <v-btn text to="/services" class="mx-2">{{ $t('nav.services') }}</v-btn>
-            <v-btn text to="/contact" class="mx-2">{{ $t('nav.contact') }}</v-btn>
-            
+          <v-btn text to="/home" class="mx-2">{{ $t("nav.home") }}</v-btn>
+          <v-btn text to="/about" class="mx-2">{{ $t("nav.about") }}</v-btn>
+          <v-btn text to="/services" class="mx-2">{{
+            $t("nav.services")
+          }}</v-btn>
+          <v-btn text to="/contact" class="mx-2">{{ $t("nav.contact") }}</v-btn>
         </v-toolbar-items>
         <!-- Language Toggle Button -->
         <v-btn icon @click="toggleLang" class="mx-2">
@@ -70,25 +71,25 @@
           <template v-slot:prepend>
             <v-icon>mdi-home</v-icon>
           </template>
-          <v-list-item-title>{{ $t('nav.home') }}</v-list-item-title>
+          <v-list-item-title>{{ $t("nav.home") }}</v-list-item-title>
         </v-list-item>
         <v-list-item to="/about" @click="drawer = false">
           <template v-slot:prepend>
             <v-icon>mdi-information</v-icon>
           </template>
-          <v-list-item-title>{{ $t('nav.about') }}</v-list-item-title>
+          <v-list-item-title>{{ $t("nav.about") }}</v-list-item-title>
         </v-list-item>
         <v-list-item to="/services" @click="drawer = false">
           <template v-slot:prepend>
             <v-icon>mdi-briefcase</v-icon>
           </template>
-          <v-list-item-title>{{ $t('nav.services') }}</v-list-item-title>
+          <v-list-item-title>{{ $t("nav.services") }}</v-list-item-title>
         </v-list-item>
         <v-list-item to="/contact" @click="drawer = false">
           <template v-slot:prepend>
             <v-icon>mdi-email</v-icon>
           </template>
-          <v-list-item-title>{{ $t('nav.contact') }}</v-list-item-title>
+          <v-list-item-title>{{ $t("nav.contact") }}</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
@@ -98,27 +99,33 @@
 <script setup>
 import { ref, watch } from "vue";
 import { useTheme } from "vuetify";
-const theme = useTheme();
-import i18n from "@/plugins/i18n"; // Import the global i18n instance directly
-const drawer = ref(false);
-
-watch(drawer, (val) => {
-  console.log("Drawer state:", val); // Debug drawer toggle
-});
 import { useThemeToggle } from "@/composables/useThemeToggle";
+import { useLocale, useRtl } from "vuetify";
+import i18n from "@/plugins/i18n";
+
+const drawer = ref(false);
+const theme = useTheme();
 const { toggleTheme } = useThemeToggle();
+
+// Vuetify hooks
+const { current } = useLocale();
+const { isRtl } = useRtl();
+
 const toggleLang = () => {
   const newLang = i18n.global.locale.value === "en" ? "ar" : "en";
   i18n.global.locale.value = newLang;
   localStorage.setItem("lang", newLang);
-  document.dir = newLang === 'ar' ? 'rtl' : 'ltr'
-  document.lang = newLang === 'ar' ? 'ar' : 'en'
-  document.documentElement.dir = newLang === 'ar' ? 'rtl' : 'ltr'
-  document.documentElement.lang = newLang === 'ar' ? 'ar' : 'en'
-  document.documentElement.setAttribute('dir', newLang === 'ar' ? 'rtl' : 'ltr')
-  document.documentElement.setAttribute('lang', newLang === 'ar' ? 'ar' : 'en')
+
+  // Update Vuetify's direction and locale
+  current.value = newLang;
+  document.documentElement.setAttribute(
+    "dir",
+    newLang === "ar" ? "rtl" : "ltr"
+  );
+  document.documentElement.setAttribute("lang", newLang);
 };
 </script>
+
 <style scoped>
 /* Smooth transitions for navigation drawer */
 .v-navigation-drawer {
