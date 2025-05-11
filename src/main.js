@@ -5,6 +5,8 @@ import vuetify from './plugins/vuetify'
 import i18n from './plugins/i18n'
 import axios from './plugins/axios'
 import router from './router'
+import './assets/styles/main.scss'
+
 
 import globalMixins from './mixins'
 

@@ -12,4 +12,11 @@ export default defineConfig({
       vue: "vue/dist/vue.esm-bundler.js", // Use ES module bundler
     },
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@use "@/assets/styles/variables.scss" as *;`
+      },
+    },
+  },
 });
