@@ -20,4 +20,9 @@ globalMixins.forEach(mixin => app.mixin(mixin))
 app.config.globalProperties.$axios = axios
 app.config.globalProperties.$t = i18n.global.t
 
+// src/main.js
+const savedLang = localStorage.getItem('lang') || 'en'
+document.documentElement.setAttribute('lang', savedLang)
+document.documentElement.setAttribute('dir', savedLang === 'ar' ? 'rtl' : 'ltr')
+ 
 app.mount('#app')

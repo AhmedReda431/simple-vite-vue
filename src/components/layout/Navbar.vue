@@ -112,18 +112,18 @@ const { current } = useLocale();
 const { isRtl } = useRtl();
 
 const toggleLang = () => {
-  const newLang = i18n.global.locale.value === "en" ? "ar" : "en";
-  i18n.global.locale.value = newLang;
-  localStorage.setItem("lang", newLang);
+  const newLang = i18n.global.locale.value === 'en' ? 'ar' : 'en'
+  i18n.global.locale.value = newLang
+  localStorage.setItem('lang', newLang)
 
-  // Update Vuetify's direction and locale
-  current.value = newLang;
-  document.documentElement.setAttribute(
-    "dir",
-    newLang === "ar" ? "rtl" : "ltr"
-  );
-  document.documentElement.setAttribute("lang", newLang);
-};
+  // Update HTML tag
+  document.documentElement.setAttribute('lang', newLang)
+  document.documentElement.setAttribute('dir', newLang === 'ar' ? 'rtl' : 'ltr')
+
+  // Optional: also update Vuetify's locale
+  current.value = newLang
+}
+
 </script>
 
 <style scoped>
