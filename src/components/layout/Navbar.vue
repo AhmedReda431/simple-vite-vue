@@ -17,7 +17,7 @@
                 : 'white--text'
             "
           >
-            MyBrand
+            A-R
           </router-link>
         </v-toolbar-title>
 
@@ -61,7 +61,7 @@
       v-model="drawer"
       app
       temporary
-      location="right"
+      :location="drawerLocation"
       :color="theme.global.current.value.dark ? 'grey-darken-3' : 'white'"
       width="250"
       class="mobile-drawer"
@@ -97,33 +97,42 @@
 </template>
 
 <script setup>
-import { ref, watch } from "vue";
+import { nextTick, ref, watch } from "vue";
 import { useTheme } from "vuetify";
 import { useThemeToggle } from "@/composables/useThemeToggle";
 import { useLocale, useRtl } from "vuetify";
 import i18n from "@/plugins/i18n";
-
+import { useRouter } from "vue-router";
+const router = useRouter();
 const drawer = ref(false);
 const theme = useTheme();
 const { toggleTheme } = useThemeToggle();
-
+import { computed } from "vue";
 // Vuetify hooks
 const { current } = useLocale();
 const { isRtl } = useRtl();
 
 const toggleLang = () => {
-  const newLang = i18n.global.locale.value === 'en' ? 'ar' : 'en'
-  i18n.global.locale.value = newLang
-  localStorage.setItem('lang', newLang)
+  const newLang = i18n.global.locale.value === "en" ? "ar" : "en";
+  i18n.global.locale.value = newLang;
+  localStorage.setItem("lang", newLang);
 
   // Update HTML tag
-  document.documentElement.setAttribute('lang', newLang)
-  document.documentElement.setAttribute('dir', newLang === 'ar' ? 'rtl' : 'ltr')
+  document.documentElement.setAttribute("lang", newLang);
+  document.documentElement.setAttribute(
+    "dir",
+    newLang === "ar" ? "rtl" : "ltr"
+  );
 
   // Optional: also update Vuetify's locale
-  current.value = newLang
-}
-
+  current.value = newLang;
+  nextTick(() => {
+    router.go(0);
+  });
+};
+const drawerLocation = computed(() =>
+  i18n.global.locale.value === "ar" ? "left" : "right"
+);
 </script>
 
 <style scoped>

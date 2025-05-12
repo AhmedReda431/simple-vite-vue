@@ -1,7 +1,6 @@
 <template>
   <v-app :dir="i18n.global.locale.value === 'ar' ? 'rtl' : 'ltr'">
     <!-- Carousel (Background Layer) -->
-    
 
     <!-- Navbar -->
     <Navbar :toggle-theme="toggleTheme" />
@@ -9,8 +8,8 @@
     <!-- Main Content -->
     <v-main class="pa-4 main-content">
       <router-view />
+      <GlobalSnackbar />
     </v-main>
-
     <!-- Footer -->
     <Footer />
   </v-app>
@@ -20,23 +19,23 @@
 import Navbar from "@/components/layout/Navbar.vue";
 
 import Footer from "@/components/layout/Footer.vue";
-import { useTheme } from 'vuetify';
-import { watch } from 'vue';
-import i18n from '@/plugins/i18n'; // Import the global i18n instance directly
-
+import { useTheme } from "vuetify";
+import { watch } from "vue";
+import i18n from "@/plugins/i18n"; // Import the global i18n instance directly
+import GlobalSnackbar from "@/components/global/GlobalSnackbar.vue";
 const theme = useTheme();
 
 const toggleTheme = () => {
-  const newTheme = theme.current.value.dark ? 'lightTheme' : 'darkTheme';
+  const newTheme = theme.current.value.dark ? "lightTheme" : "darkTheme";
   theme.name.value = newTheme;
-  localStorage.setItem('theme', newTheme);
+  localStorage.setItem("theme", newTheme);
 };
 
 // Watch locale changes to update document direction
 watch(
   () => i18n.global.locale.value,
   (newLocale) => {
-    document.documentElement.dir = newLocale === 'ar' ? 'rtl' : 'ltr';
+    document.documentElement.dir = newLocale === "ar" ? "rtl" : "ltr";
   },
   { immediate: true }
 );

@@ -60,7 +60,7 @@ const items = ref([
     sizes: '(max-width: 600px) 600px, (max-width: 960px) 960px, 1280px',
     alt: 'Nature Landscape',
     title: 'Explore Nature',
-    text: 'Discover breathtaking landscapes with MyBrand.',
+    text: 'Discover breathtaking landscapes with A-R.',
   },
   {
     src: 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308',
@@ -84,7 +84,7 @@ const items = ref([
     sizes: '(max-width: 600px) 600px, (max-width: 960px) 960px, 1280px',
     alt: 'Beach Sunset',
     title: 'Coastal Getaways',
-    text: 'Relax by the sea with MyBrand.',
+    text: 'Relax by the sea with A-R.',
   },
 ]);
 
@@ -104,7 +104,7 @@ const theme = useTheme();
 
 <style scoped>
 .carousel-container {
-  width: 100vw;
+  max-width: 100vw;
   height: 100svh;
   top: 0;
   left: 0;

@@ -4,7 +4,7 @@
       <v-row class="py-8">
         <!-- Company Info -->
         <v-col cols="12" sm="6" md="3" class="mb-6 mb-md-0">
-          <h3 class="text-h6 mb-4">MyBrand</h3>
+          <h3 class="text-h6 mb-4">A-R</h3>
           <p class="body-2">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -36,7 +36,7 @@
           <p class="body-2">
             1234 Street Name<br />
             City, State, 56789<br />
-            Email: info@mybrand.com<br />
+            Email: info@A-R.com<br />
             Phone: (123) 456-7890
           </p>
         </v-col>
@@ -80,7 +80,7 @@
       <v-row class="py-4" no-gutters>
         <v-col cols="12" class="text-center">
           <span class="body-2">
-            © {{ new Date().getFullYear() }} MyBrand. All rights reserved.
+            © {{ new Date().getFullYear() }} A-R. All rights reserved.
           </span>
         </v-col>
       </v-row>
@@ -98,6 +98,7 @@ const theme = useTheme();
 .v-footer a {
   color: inherit !important;
   text-decoration: none;
+  background: transparent;
 }
 
 

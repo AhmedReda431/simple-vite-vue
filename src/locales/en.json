@@ -4,5 +4,10 @@
     "about": "About",
     "services": "Services",
     "contact": "Contact"
+  },
+  "messages": {
+    "Error occurred": "Error occurred",
+    "Saved": "Saved",
+    "test message":"Test Message"
   }
 }
